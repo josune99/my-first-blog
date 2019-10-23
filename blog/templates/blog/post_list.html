@@ -1,29 +1,13 @@
-<html>
-    <head>
-        <title>El blog de Josune</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Django Girls Blog</a></h1>
-        </div>
-            {% for post in posts %}
-                <div>
-                    <p> publicado: {{ post.published_date }}</p>
-                    <h2><a href="">{{ post.title }}</a></h2>
-                    <p>{{ post.text|linebreaksbr }}</p>
-                </div>
-            {% endfor %}
+{% extends 'blog/base.html' %}
 
-        <div>
-            <h2><a href="">My first post</a></h2>
-            <p>Payasa.</p>
-            <p>published: hoy</p>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-
-        <div>
-            <h2><a href="">My second post</a></h2>
-            <p>Sigo siendo una payasa.</p>
-            <p>published: hoy</p>
-        </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
